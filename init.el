@@ -236,8 +236,22 @@
              '("melpa" . "http://melpa.org/packages/") t)
 
 (global-set-key (kbd  "C-,") 'beginning-of-line-text)
+
+(load-file "/home/bill/.emacs.d/lib/fzy-locate/fzy-locate.el")
+(fzloc-load-dbs-from-path "/home/bill/repos/emacs-live/locatedbs/*.locatedb")
+(setq fzloc-filter-regexps '("/target/" "/.git/"))
+
+(global-set-key (kbd "C-x SPC") 'fzy-locate)
 (global-set-key (kbd  "C-x p") 'ace-jump-mode-pop-mark)
 (global-set-key (kbd  "C-x x") 'rgrep)
+
+(defun refresh-emacs-locatedb ()
+  (interactive)
+  (message "Refreshing locatedb. This may take a bit...")
+  (shell-command "/home/bill/bin/refresh-emacs-locatedb.sh")
+  (message "Refresh completed."))
+
+(global-set-key (kbd "C-c r") 'refresh-emacs-locatedb)
 
 (setq frame-title-format
   '("" invocation-name ": "(:eval (if (buffer-file-name)
@@ -255,3 +269,4 @@
 ;; END Bill's stuff
 
 (message "\n\n Pack loading completed. Your Emacs is Live...\n\n")
+(put 'erase-buffer 'disabled nil)
