@@ -31,16 +31,16 @@
     (setq cljr-project-clean-prompt nil)))
 
 (Given "^I switch auto-sort off$"
-  (lambda ()
-    (setq cljr-auto-sort-ns nil)))
+       (lambda ()
+         (setq cljr-auto-sort-ns nil)))
 
 (Given "^I switch auto-sort on$"
   (lambda ()
     (setq cljr-auto-sort-ns t)))
 
 (Given "^I set sort comparator to string length$"
-  (lambda ()
-    (setq cljr-sort-comparator 'cljr--string-length-comparator)))
+       (lambda ()
+         (setq cljr-sort-comparator 'cljr--string-length-comparator)))
 
 (Given "^I set sort comparator to semantic$"
   (lambda ()
@@ -51,12 +51,54 @@
      (setq cljr-sort-comparator 'cljr--string-natural-comparator)))
 
 (Given "^I exit multiple-cursors-mode"
-  (lambda ()
-    (multiple-cursors-mode 0)))
+       (lambda ()
+         (multiple-cursors-mode 0)))
+
+(Given "^I call the rename callback directly with mock data for foo->baz"
+       (lambda ()
+         (cljr--rename-occurrences "example.two"
+                                   '((:line-beg 3 :line-end 4 :col-beg 1 :col-end 9
+                                                :name "foo"
+                                                :file "tmp/src/example/two.clj"
+                                                :match "")
+                                     (:line-beg 5 :line-end 5 :col-beg 15
+                                                :col-end 23 :name "foo"
+                                                :file "tmp/src/example/one.clj"
+                                                :match ""))
+                                   "baz")))
+
+(Given "^I call the rename callback directly with mock data for star->asterisk"
+       (lambda ()
+         (cljr--rename-occurrences "example.two"
+                                   '((:line-beg 6 :line-end 7 :col-beg 1
+                                                :col-end 10 :name "star*"
+                                                :file "tmp/src/example/two.clj"
+                                                :match "")
+                                     (:line-beg 8 :line-end 8 :col-beg 17
+                                                :col-end 27 :name "star*"
+                                                :file "tmp/src/example/one.clj"
+                                                :match ""))
+                                   "asterisk*")))
+
+(Given "^I call the add-missing-libspec callback directly with mock data to import"
+       (lambda ()
+         (cljr--add-missing-libspec "Date" '((java.util.Date :class)))))
+
+(Given "^I call the add-missing-libspec callback directly with mock data to refer split"
+       (lambda ()
+         (cljr--add-missing-libspec "split" '((clojure.string  :ns)))))
+
+(Given "^I call the add-missing-libspec callback directly with mock data to alias clojure.string"
+       (lambda ()
+         (cljr--add-missing-libspec "str/split" '((clojure.string :ns)))))
+
+(Given "^I call the add-missing-libspec callback directly with mock data to require WebrequestHandler"
+       (lambda ()
+         (cljr--add-missing-libspec "WebrequestHandler" '((modular.ring.WebrequestHandler :type)))))
 
 (Then "^the file should be named \"\\([^\"]+\\)\"$"
-  (lambda (file-name-postfix)
-    (assert (s-ends-with? file-name-postfix (buffer-file-name)) nil "Expected %S to end with %S" (buffer-file-name) file-name-postfix)))
+      (lambda (file-name-postfix)
+        (assert (s-ends-with? file-name-postfix (buffer-file-name)) nil "Expected %S to end with %S" (buffer-file-name) file-name-postfix)))
 
 (And "^the cursor is inside the first defn form$"
   (lambda ()
