@@ -1,0 +1,30 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/home/bill/" . #(".lein/" 0 4 (face flx-highlight-face)))
+)
+
+;; ----- ido-work-directory-list -----
+(
+ #("/home/bill/.lein/" 11 15 (face flx-highlight-face))
+)
+
+;; ----- ido-work-file-list -----
+(
+ "profiles.clj"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ (#("/home/bill/.lein/" 11 15 (face flx-highlight-face)) (21903 25238 981786 982000) "profiles.clj" "../" "self-installs/" "./")
+
+ ("/home/bill/repos/" (21902 3588 432455 634000) "gilbitron-pico/" "clojurescript/" "emacs-live/" "phaser-tryout/" "DarkSky.py/" "rjml-playground/" "dasksky-response" "pytest" "claunjcher/" "om-lette.old/" "git-log-parse.1/" "sweet-liberty-example/" "rule-based-scheduler/" "boxcutter/" "lein-gossip/" "closer.js/" "drum-mini-shell.scad" "orderly/" "git-log-parse/" "dotfiles/" "emacs-live-backup/" "demo/" "developer-portal/" "try-incanter/" "endoscopy/" "om-lette/" "../" "flow-jaun/" "orderly1/" "get-weather.py" "sweet-liberty/" "stackplan/" "./" "bpiel-pico/" "clj17-a4/" "match-maker/" "claunjcher.real/" "blog.billpiel.com-mods/" "db.clj" "CandidateEvalEnv/" "dummy/" "hello-browser/" "fuzzyfox-pico/" "difference.scad" "a-lisp/" "ssa-baby-names-analysis/" "service-broker/" "wutchamean/" "index.html" "tools.trace/" "liberator/")
+
+ ("/home/bill/repos/sweet-liberty/" (21903 25766 356494 919000) ".git/" ".gitignore" "sweet-liberty.log" "doc/" "pom.xml" "pom.xml.asc" "../" "src/" "README.md" "project.clj" ".lein-repl-history" "./" "target/" "test/" "LICENSE")
+
+ ("/home/bill/" (21903 22263 829850 835000) ".config/" ".adobe/" ".gnupg/" "Documents/" "remotes/" ".gconf/" ".vagrant.d/" ".lein/" ".xmobarcc-stdin" "Package.list.15" ".xsession-errors.old" "packages.diff" ".thunderbird/" ".sudo_as_admin_successful" ".Xauthority" ".xmobarcc" ".gitconfig" ".ICEauthority" ".lesshst" ".gnome/" ".xmonad/" "repos/" ".xsession-errors" "examples.desktop" "Music/" "bashrc.original" "scripts/" ".compiz/" "Public/" ".pki/" ".local/" ".emacs.d/" ".dmrc" ".profile" ".bash_logout" ".xmobarcc.save" "../" "Pictures/" ".cache/" ".screenlayout/" "bin/" ".mozilla/" "openelec/" ".macromedia/" "Videos/" ".pip/" ".dbus/" "./" ".xmobarcc-2" ".m2/" "Downloads/" "Templates/" ".fehbg" ".bashrc" ".ssh/" "Desktop/" ".bash_history" ".virtualenvs/")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t

@@ -2,13 +2,30 @@
 
 ## master (unreleased)
 
+## 0.9.1 / 2015-06-24
+
+### New features
+
+* [#1155](https://github.com/clojure-emacs/cider/pull/1155): The debugger displays overlays highlighting the current sexp and its return value.
+
+### Bugs fixed
+
+* [#1142](https://github.com/clojure-emacs/cider/issues/1142): Don't retrive nrepl ports when `cider-known-endpoints` entry already contains the port.
+* [#1153](https://github.com/clojure-emacs/cider/pull/1153): Fix behavior of `cider-switch-to-current-repl-buffer`.
+* [#1139](https://github.com/clojure-emacs/cider/issues/1139): Fix evaluation of ns forms and of forms with unevaluated namespaces.
+* Replace `assert` with `cl-assert` (we don't use anything from `cl` now).
+* [#1135](https://github.com/clojure-emacs/cider/pull/1135): Fix a corner case with locals display in the debugger.
+* [#1129](https://github.com/clojure-emacs/cider/issues/1129): Fix occasional `(wrong-type-argument stringp nil)` on clojure-android.
+* [#1122](https://github.com/clojure-emacs/cider/issues/1122): Run client initialization in new client buffer.
+* [#1143](https://github.com/clojure-emacs/cider/issues/1143): Handle tests without location metadata.
+
 ## 0.9.0 / 2015-06-16
 
 ### New features
 
-* [#1109](https://github.com/clojure-emacs/cider/issues/1061) New defcustom `cider-auto-mode`.
+* [#1109](https://github.com/clojure-emacs/cider/issues/1109): New defcustom `cider-auto-mode`.
 On by default, when `nil` don't automatically enable `cider-mode` in all Clojure buffers.
-* [#1061](https://github.com/clojure-emacs/cider/issues/1061) New command `cider-find-ns`, bound to <kbd>C-c C-.</kbd>, which prompts for an ns and jumps to the corresponding source file.
+* [#1061](https://github.com/clojure-emacs/cider/issues/1061): New command `cider-find-ns`, bound to <kbd>C-c C-.</kbd>, which prompts for an ns and jumps to the corresponding source file.
 * [#1019](https://github.com/clojure-emacs/cider/pull/1019): New file, cider-debug.el.
   Provides a new command, `cider-debug-defun-at-point`, bound to <kbd>C-u C-M-x</kbd>.
   Interactively debug top-level clojure forms.
@@ -95,7 +112,6 @@ when in buffer that's not visiting a file (e.g. a REPL buffer).
 * [#981](https://github.com/clojure-emacs/cider/issues/981): Updated `cider-find-file` to use `find-buffer-visiting` instead of `get-file-buffer`.
 * [#1004](https://github.com/clojure-emacs/cider/issues/1004): `:repl-env` key is now filtered from exception causes, as it contains unprintably large strings of compiled javascript when using ClojureScript.
 * Tunneled ssh connection now deals correctly with the ssh password request.
-* [#1026](https://github.com/clojure-emacs/cider/issues/1026): The full `(ns ...)` form for the current buffer is now sent with all source-tracking eval requests, to fix ClojureScript compatibility.
 * [#1033](https://github.com/clojure-emacs/cider/issues/1033): Removed erroneous underlining from stacktrace frames and disabled frame filters in the error buffer.
 * The error buffer no longer pops up when there is no error to display.
 * `cider-find-resource` now correctly throws an error when no path is provided.

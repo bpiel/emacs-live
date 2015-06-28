@@ -80,6 +80,7 @@ CIDER packs plenty of features. Here are some of them (in no particular order):
   - [Managing multiple sessions](#managing-multiple-sessions)
 - [Requirements](#requirements)
 - [Caveats](#caveats)
+  - [Var Metadata](#var-metadata)
   - [ClojureScript limitations](#clojurescript-limitations)
   - [Microsoft Windows](#microsoft-windows)
   - [powershell.el](#powershell-el)
@@ -184,7 +185,7 @@ Use the convenient plugin for defaults, either in your project's
 A minimal `profiles.clj` for CIDER would be:
 
 ```clojure
-{:user {:plugins [[cider/cider-nrepl "0.9.0"]]}}
+{:user {:plugins [[cider/cider-nrepl "0.9.1"]]}}
 ```
 
 ### Using Boot
@@ -196,11 +197,13 @@ all of their projects using a `~/.boot/profile.boot` file like so:
 (require 'boot.repl)
 
 (swap! boot.repl/*default-dependencies*
-       concat '[[cider/cider-nrepl "0.9.0"]])
+       concat '[[cider/cider-nrepl "0.9.1"]])
 
 (swap! boot.repl/*default-middleware*
        conj 'cider.nrepl/cider-middleware)
 ```
+
+For more information visit [boot-clj wiki](https://github.com/boot-clj/boot/wiki/Cider-REPL).
 
 ### Using embedded nREPL server
 
@@ -779,7 +782,7 @@ Keyboard shortcut                    | Description
 <kbd>C-c C-.</kbd>                   | Jump to some namespace on the classpath.
 <kbd>M-,</kbd>                       | Return to your pre-jump location.
 <kbd>M-TAB</kbd>                     | Complete the symbol at point.
-<kbd>C-c C-d g</kbd>                 | Lookup symbol in Grimoire.
+<kbd>C-c C-d r</kbd>                 | Lookup symbol in Grimoire.
 <kbd>C-c C-d a</kbd>                 | Apropos search for functions/vars.
 <kbd>C-c C-d A</kbd>                 | Apropos search for documentation.
 
@@ -801,7 +804,7 @@ Keyboard shortcut                    | Description
 <kbd>TAB</kbd> | Complete symbol at point.
 <kbd>C-c C-d d</kbd> | Display doc string for the symbol at point.  If invoked with a prefix argument, or no symbol is found at point, prompt for a symbol
 <kbd>C-c C-d j</kbd> | Display JavaDoc (in your default browser) for the symbol at point.  If invoked with a prefix argument, or no symbol is found at point, prompt for a symbol.
-<kbd>C-c C-d g</kbd> | Lookup symbol in Grimoire.
+<kbd>C-c C-d r</kbd> | Lookup symbol in Grimoire.
 <kbd>C-c C-d a</kbd> | Apropos search for functions/vars.
 <kbd>C-c C-d A</kbd> | Apropos search for documentation.
 <kbd>C-c C-z</kbd> | Switch to the previous Clojure buffer. This complements <kbd>C-c C-z</kbd> used in cider-mode.
@@ -874,9 +877,9 @@ Keyboard shortcut               | Description
 ### cider-debug
 <!-- Technically this is not a mode (yet), but let's not burden the user with that knowledge. -->
 
-cider-debug (invoked with <kbd>C-u C-M-x</kbd>) tries to be consistent with
-Edebug. So it makes available the following bindings while stepping through
-code.
+`cider-debug` (invoked with <kbd>C-u C-M-x</kbd>) tries to be consistent with
+[Edebug](http://www.gnu.org/software/emacs/manual/html_node/elisp/Edebug.html). So
+it makes available the following bindings while stepping through code.
 
 Keyboard shortcut               | Description
 --------------------------------|-------------------------------
@@ -885,7 +888,12 @@ Keyboard shortcut               | Description
 <kbd>o</kbd> | Move out of the current sexp (like `up-list`)
 <kbd>i</kbd> | Inject a value into running code
 <kbd>e</kbd> | Eval code in current context
+<kbd>l</kbd> | List local variables
 <kbd>q</kbd> | Quit execution
+
+To uninstrument a form, after having instrumented it with <kbd>C-u C-M-x</kbd>
+you just have to evaluate the form again as you'd normally do (e.g. with
+<kbd>C-M-x</kbd>).
 
 ### Managing multiple sessions
 
@@ -933,6 +941,17 @@ change `*cider-repl localhost*` to `*cider-repl foo*`.
 * [Clojure](http://clojure.org) 1.5.0+
 
 ## Caveats
+
+### Var Metadata
+
+Currently var metadata about the location of the var's definition within the
+source code (file, line & column) is set only when evaluating the entire source
+buffer (<kbd>C-c C-k</kbd>). All other interactive code evaluation commands
+(e.g. <kbd>C-c C-e</kbd>) don't set this metadata and you won't be able to use
+commands like `find-var` on such vars.  That's a
+[limitation of nREPL](http://dev.clojure.org/jira/browse/NREPL-59), that's
+beyond CIDER. If you want to see interactive evaluation working properly in
+CIDER you'll have to push for the aforementioned nREPL issue to be resolved.
 
 ### ClojureScript limitations
 
@@ -1020,6 +1039,28 @@ In the REPL buffer, issue the following.
     cider.nrepl.middleware.util.instrument> (def verbose-debug true)
 
 This will cause cider to print extensive information on the REPL buffer when you try to debug an expression (e.g., with `C-u C-M-x`). [File an issue](https://github.com/clojure-emacs/cider-repl/issues/new) and copy this information.
+
+### Warning saying you have to use nREPL 0.2.7+
+
+CIDER currently requires at least nREPL 0.2.7 to work properly (there were some
+nasty bugs in 0.2.6). Unfortunately the latest `leiningen` (2.5.1) pulls in exactly
+0.2.6, so you if you're a lein user you'll have to do a bit of manual work. Just
+add this to your `profiles.clj`:
+
+```clojure
+{:user {:dependencies [[org.clojure/tools.nrepl "0.2.10"]]}}
+```
+
+Make sure you add the newer nREPL dependency to the `:dependencies` key instead
+of `:plugins` (where `cider-nrepl` Lein plugin resides). That's a pretty common
+mistake.
+
+Generally you're advised to use the newest nREPL with CIDER, as bugs get fixed
+in pretty much every release.
+
+Note, that running `cider-jack-in` from outside the scope of a project will
+result in the **older (0.2.6) nREPL dependency being used** (at least on Leiningen
+2.5.1). This is likely a Leiningen bug.
 
 ## Documentation
 
