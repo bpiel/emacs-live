@@ -210,21 +210,23 @@
         (live-pack-dirs))
 
 (setq live-welcome-messages
-      (if (live-user-first-name-p)
-          (list (concat "Hello " (live-user-first-name) ", somewhere in the world the sun is shining for you right now.")
-                (concat "Hello " (live-user-first-name) ", it's lovely to see you again. I do hope that you're well.")
-                (concat (live-user-first-name) ", turn your head towards the sun and the shadows will fall behind you.")
-                )
-        (list  "Hello, somewhere in the world the sun is shining for you right now."
-               "Hello, it's lovely to see you again. I do hope that you're well."
-               "Turn your head towards the sun and the shadows will fall behind you.")))
+      (list "
+;; When a kid grows up, he has to be something. He can’t just stay the way he is.
+;; But a tiger grows up and stays a tiger why is that? -- Calvin"
+            "
+;; As you can see, I have memorized this utterly useless piece of information long enough to pass a test question.
+;; I now intend to forget it forever. -- Calvin"
+            "
+;; I like maxims that don't encourage behavior modification. -- Calvin"
+            "
+;; I think grown-ups just act like they know what they are doing. -- Calvin"))
 
 
 (defun live-welcome-message ()
   (nth (random (length live-welcome-messages)) live-welcome-messages))
 
 (when live-supported-emacsp
-  (setq initial-scratch-message (concat live-ascii-art-logo " Version " live-version
+  (setq initial-scratch-message (concat live-ascii-art-logo ";; Emacs LIVE Version " live-version
                                                                 (if live-safe-modep
                                                                     "
 ;;                                                     --*SAFE MODE*--"
@@ -232,11 +234,9 @@
 ;;"
                                                                   ) "
 ;;           http://github.com/overtone/emacs-live
-;;
-;; "                                                      (live-welcome-message) "
+;;"                                                      (live-welcome-message) "
 
-")))
-)
+"))))
 
 (if (not live-disable-zone)
     (add-hook 'term-setup-hook 'zone))
