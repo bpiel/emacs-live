@@ -287,6 +287,10 @@
 (setq ahs-default-range 'ahs-range-whole-buffer)
 (global-auto-highlight-symbol-mode t)
 
+(defun switch-to-most-recent-buffer ()
+      (interactive)
+      (switch-to-buffer (other-buffer (current-buffer) 1)))
+(global-set-key (kbd  "C-M-<return>") 'switch-to-most-recent-buffer)
 
 ;; END Bill's stuff
 
