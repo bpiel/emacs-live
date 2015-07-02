@@ -363,13 +363,14 @@ path. For example, '/home/user/.emacs.d/locatedbs/*.locatedb'."
                (append-recentf (append split-list recentf-list))
                (filter-list-rgx (remove-if #'fzloc-filter-pred append-recentf ))
                (filter-list-min (remove-if #'fzloc-filter-min-score filter-list-rgx))
-               (sort-list (sort filter-list-min
+               (sort-list-alpha (sort  filter-list-min 'string-lessp))
+               (nodups (remove-if #'fzloc-same-as-last? sort-list-alpha))
+               (sort-list (sort nodups
                                 (lambda (a b) (>= (mem-score a)
                                                   (mem-score b)))))
-               (nodups (remove-if #'fzloc-same-as-last? sort-list))
                (dummy (setq original-max-lisp-eval-depth max-lisp-eval-depth))
                (dummy (setq max-lisp-eval-depth 5000)) ;; keep join-string from hitting max-list-eval-depth
-               (final-str (join-string nodups "\n"))
+               (final-str (join-string sort-list "\n"))
                (dummy (setq max-lisp-eval-depth original-max-lisp-eval-depth)))
           (insert final-str)
           (insert "\n"))))
