@@ -291,6 +291,7 @@
       (interactive)
       (switch-to-buffer (other-buffer (current-buffer) 1)))
 (global-set-key (kbd  "C-M-<return>") 'switch-to-most-recent-buffer)
+(global-set-key (kbd  "C-M-<backspace>") 'revert-buffer)
 
 ;; https://github.com/clojure-emacs/cider#basic-configuration
 (setq cider-auto-select-error-buffer nil)
