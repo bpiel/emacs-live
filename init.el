@@ -306,6 +306,19 @@
 (set-face-attribute 'rainbow-delimiters-depth-8-face nil :foreground "#BBBBBB")
 (set-face-attribute 'rainbow-delimiters-depth-9-face nil :foreground "#66FF66")
 
+(defun sudo-edit (&optional arg)
+  "Edit currently visited file as root.
+
+With a prefix ARG prompt for a file to visit.
+Will also prompt for a file to visit if current
+buffer is not visiting a file."
+  (interactive "P")
+  (if (or arg (not buffer-file-name))
+      (find-file (concat "/sudo:root@localhost:"
+                         (ido-read-file-name "Find file(as root): ")))
+    (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
+
+
 ;; END Bill's stuff
 
 (message "\n\n Pack loading completed. Your Emacs is Live...\n\n")
