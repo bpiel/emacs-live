@@ -292,6 +292,7 @@
       (switch-to-buffer (other-buffer (current-buffer) 1)))
 (global-set-key (kbd  "C-M-<return>") 'switch-to-most-recent-buffer)
 (global-set-key (kbd  "C-M-<backspace>") 'revert-buffer)
+(global-set-key (kbd  "C-S-o") 'ace-jump-char-mode)
 
 ;; https://github.com/clojure-emacs/cider#basic-configuration
 (setq cider-auto-select-error-buffer nil)
@@ -317,6 +318,7 @@ buffer is not visiting a file."
       (find-file (concat "/sudo:root@localhost:"
                          (ido-read-file-name "Find file(as root): ")))
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
+
 
 
 ;; END Bill's stuff
