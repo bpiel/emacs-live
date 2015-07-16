@@ -323,7 +323,7 @@ current buffer is not visiting a file."
   (live-delete-whitespace-except-one))
 
 (global-set-key (kbd "C-c s d") 'insert-spyd)
-
+(global-set-key (kbd "C-c !") 'cider-load-buffer)
 
 
 ;; END Bill's stuff
