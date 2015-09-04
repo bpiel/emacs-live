@@ -325,9 +325,11 @@ current buffer is not visiting a file."
 (global-set-key (kbd "C-c s d") 'insert-spyd)
 (global-set-key (kbd "C-c !") 'cider-load-buffer)
 
+(put 'erase-buffer 'disabled nil)
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
 
 ;; END Bill's stuff
 
 (message "\n\n Pack loading completed. Your Emacs is Live...\n\n")
-(put 'erase-buffer 'disabled nil)
-(put 'downcase-region 'disabled nil)
