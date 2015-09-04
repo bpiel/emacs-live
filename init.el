@@ -329,6 +329,9 @@ current buffer is not visiting a file."
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
+(defun insert-midje-repl ()
+  (interactive)
+  (insert "(require '[midje.repl :as mr])"))
 
 ;; END Bill's stuff
 
