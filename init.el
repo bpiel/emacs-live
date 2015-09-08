@@ -333,6 +333,10 @@ current buffer is not visiting a file."
   (interactive)
   (insert "(require '[midje.repl :as mr])"))
 
+(defun insert-tools-trace ()
+  (interactive)
+  (insert "(require '[clojure.tools.trace :as ctt])"))
+
 ;; END Bill's stuff
 
 (message "\n\n Pack loading completed. Your Emacs is Live...\n\n")
