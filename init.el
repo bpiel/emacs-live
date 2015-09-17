@@ -293,6 +293,7 @@
 (global-set-key (kbd  "C-M-<return>") 'switch-to-most-recent-buffer)
 (global-set-key (kbd  "C-M-<backspace>") 'revert-buffer)
 (global-set-key (kbd  "C-S-o") 'ace-jump-char-mode)
+(global-set-key (kbd  "C-S-a") 'mark-whole-buffer)
 
 ;; https://github.com/clojure-emacs/cider#basic-configuration
 (setq cider-auto-select-error-buffer nil)
