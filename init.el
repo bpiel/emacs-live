@@ -323,8 +323,14 @@ current buffer is not visiting a file."
   (insert "#spy/d")
   (live-delete-whitespace-except-one))
 
+(defun repl-clear-and-prev ()
+  (interactive)
+  (cider-repl-clear-buffer)
+  (cider-repl-previous-input))
+
 (global-set-key (kbd "C-c s d") 'insert-spyd)
 (global-set-key (kbd "C-c !") 'cider-load-buffer)
+(global-set-key (kbd "C-S-c C-S-p") 'repl-clear-and-prev)
 
 (put 'erase-buffer 'disabled nil)
 (put 'downcase-region 'disabled nil)
