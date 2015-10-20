@@ -344,6 +344,28 @@ current buffer is not visiting a file."
   (interactive)
   (insert "(require '[clojure.tools.trace :as ctt])"))
 
+(defun bpiel/add-midje-forms-to-clojure-dedenting ()
+  (put-clojure-indent 'fact-group 1)
+  (put-clojure-indent 'facts 1)
+  (put-clojure-indent 'fact 1)
+  (put-clojure-indent 'tabular nil)
+  (put-clojure-indent 'for-all 1))
+
+(eval-after-load 'clojure-mode
+  '(add-hook 'clojure-mode-hook 'bpiel/add-midje-forms-to-clojure-dedenting))
+
+(defun bpiel/add-compojure-forms-to-clojure-dedenting ()
+  (put-clojure-indent 'context 2)
+  (put-clojure-indent 'ANY 2)
+  (put-clojure-indent 'PUT 2)
+  (put-clojure-indent 'GET 2)
+  (put-clojure-indent 'POST 2)
+  (put-clojure-indent 'DELETE 2)
+  (put-clojure-indent 'PATCH 2))
+
+(eval-after-load 'clojure-mode
+  '(add-hook 'clojure-mode-hook 'bpiel/add-compojure-forms-to-clojure-dedenting))
+
 ;; END Bill's stuff
 
 (message "\n\n Pack loading completed. Your Emacs is Live...\n\n")
