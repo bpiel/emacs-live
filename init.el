@@ -265,7 +265,8 @@
 
 (global-set-key (kbd "C-x SPC") 'fzy-locate)
 (global-set-key (kbd  "C-x p") 'ace-jump-mode-pop-mark)
-(global-set-key (kbd  "C-x x") 'rgrep)
+(global-set-key (kbd  "C-x x") 'ag-regexp)
+(setq ag-highlight-search t)
 
 (defun refresh-emacs-locatedb ()
   (interactive)
