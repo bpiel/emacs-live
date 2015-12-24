@@ -345,6 +345,10 @@ current buffer is not visiting a file."
   (interactive)
   (insert "(require '[clojure.tools.trace :as ctt])"))
 
+(defun insert-def-ppr ()
+  (interactive)
+  (insert "(def ppr clojure.pprint/pprint)"))
+
 (defun bpiel/add-midje-forms-to-clojure-dedenting ()
   (put-clojure-indent 'fact-group 1)
   (put-clojure-indent 'facts 1)
